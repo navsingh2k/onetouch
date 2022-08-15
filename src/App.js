@@ -15,8 +15,9 @@ function App() {
   console.log(process.env);
   const newsApi = async () => {
     try{
+      const proxyUrl = "https://cors-anywhere.herokuapp.com/";
 
-      const news = await axios.get(`https://newsapi.org/v2/top-headlines?country=in&apiKey=${process.env.REACT_APP_API_KEY}&category=${category}&pageSize=${loadmore}`);
+      const news = await axios.get(`${proxyUrl}https://newsapi.org/v2/top-headlines?country=in&apiKey=${process.env.REACT_APP_API_KEY}&category=${category}&pageSize=${loadmore}`);
       console.log(news)
       setNewsArray(news.data.articles);
       setNewsResults(news.data.totalResults);
@@ -29,6 +30,7 @@ function App() {
   console.log(newsArray);
   useEffect(() => {
    newsApi();
+    // eslint-disable-next-line
   }, [newsResults,category,loadmore]);
   
   return (
